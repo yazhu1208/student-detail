@@ -1,0 +1,340 @@
+<html>
+<title>student details task</title>
+<style>
+  /*---general style*/
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    background-color: aquamarine;
+    padding: 20px;
+    margin: 0;
+  }
+
+  h1 {
+    color: blueviolet;
+    font-size: large;
+
+  }
+
+  h3 {
+    color: blueviolet;
+    font-size: medium;
+  }
+
+  .formsection {
+    background-color: antiquewhite;
+    paddind: 20px;
+    color: black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .form-detail {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    color: black
+  }
+
+  .form-detail label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: blue;
+  }
+
+  .form-detail input[type="text"],
+  .form-detail input[type="number"],
+  .form-group input[type="email"] {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus {
+    border-color: blue;
+  }
+
+  .gender-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .gender-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: brown;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: blueviolet;
+    transform: scale(1.05);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: 10px;
+
+  }
+
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid blue;
+  }
+
+  th {
+    background-color: #007bff;
+    color: white;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .action-button {
+    display: flex;
+    gap: 5px;
+  }
+
+  .action-button button {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .action-button button.edit {
+    background-color: #28a745;
+  }
+
+  .action-button button.edit:hover {
+    background-color: #218838;
+  }
+
+  .action-button button.delete {
+    background-color: #dc3545;
+  }
+
+  .action-button button.delete:hover {
+    background-color: #c82333;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 600px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    th {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    td {
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+    }
+
+    td:before {
+      position: absolute;
+      left: 10px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .action-button {
+      justify-content: flex-start;
+    }
+  }
+</style>
+
+</style>
+
+<body>
+  <div class="formsection">
+    <h1>STUDENT DETAILS TASK</h1>
+    <h3> STUDENT FORM</h3>
+
+    <form id="studentform">
+      <div class="container">
+
+        <div class="form-detail">
+          <label>name</label>
+          <input type="text" placeholder="enter name" id="name">
+        </div>
+        <div class="form-detail">
+          <label>age</label>
+          <input type="number" placeholder="enter age" id="age">
+        </div>
+        <div class="form-detail">
+          <label>gender</label>
+          <div class="gender-group">
+            <label> <input type="radio" name="gender" value="male" checked> male </label>
+            <label><input type="radio" name="gender" value="female">female </label>
+          </div>
+        </div>
+        <div class="form-detail"> <label>course</label>
+          <input type="text" placeholder="enter course" id="course">
+        </div>
+        <div class="form-detail"> <label>E-mail</label>
+          <input type="text" placeholder="enter email" id="email">
+        </div>
+        <div class="form-detail"><button onclick="savestudentdetail()" id="savebutton">save</button> </div>
+      </div>
+    </form>
+  </div>
+  <table id="studenttable">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>age</th>
+        <th>gender</th>
+        <th>course</th>
+        <th>email</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="name">yazhini</td>
+        <td data-label="age">24</td>
+        <td data-label="gender">female</td>
+        <td data-label="course">java</td>
+        <td data-label="email">yazhu2012@gmail.com</td>
+        <td data-label="action">
+          <div class="action-button">
+            <button class="edit" onclick="editStudent(this)">Edit</button>
+            <button class="delete" onclick="deleteStudent(this)">delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="name">bala</td>
+        <td data-label="age">26</td>
+        <td data-label="gender">male</td>
+        <td data-label="course">sap</td>
+        <td data-label="email">bala2012@gmail.com</td>
+        <td data-label="action">
+          <div class="action-button">
+            <button class="edit" onclick="editStudent(this)">Edit</button>
+            <button class="delete" onclick="deleteStudent(this)">delete</button>
+        </td>
+      </tr>
+      </div>
+    </tbody>
+
+  </table>
+  <script>
+function savestudentdetail() {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const gender = document.querySelector("input[name='gender']:checked").value;
+  const course = document.getElementById("course").value;
+  const email = document.getElementById("email").value;
+
+  if (!name || !age || !gender || !course || !email) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  const table = document.getElementById("studenttable").getElementsByTagName("tbody")[0];
+
+  const newRow = table.insertRow();
+  newRow.innerHTML = `
+    <td data-label="name">${name}</td>
+    <td data-label="age">${age}</td>
+    <td data-label="gender">${gender}</td>
+    <td data-label="course">${course}</td>
+    <td data-label="email">${email}</td>
+    <td data-label="action">
+      <div class="action-button">
+        <button class="edit" onclick="editStudent(this)">Edit</button>
+        <button class="delete" onclick="deleteStudent(this)">Delete</button>
+      </div>
+    </td>
+  `;
+
+  document.getElementById("studentform").reset();
+}
+
+// Delete student record
+function deleteStudent(button) {
+  const row = button.closest("tr");
+  row.remove();
+}
+
+// Edit student record
+function editStudent(button) {
+  const row = button.closest("tr");
+  const cells = row.getElementsByTagName("td");
+
+  document.getElementById("name").value = cells[0].textContent;
+  document.getElementById("age").value = cells[1].textContent;
+  const gender = cells[2].textContent.toLowerCase();
+  document.querySelector(`input[name='gender'][value='${gender}']`).checked = true;
+  document.getElementById("course").value = cells[3].textContent;
+  document.getElementById("email").value = cells[4].textContent;
+
+  row.remove();
+}
+ </script>
+</body>
+</html>
